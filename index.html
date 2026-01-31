@@ -153,7 +153,7 @@
       <button class="no" onmouseover="moveNo()">No 🙈</button>
     </div>
 
-    <div class="message" id="message">Yay!!! I love you 😍💐</div>
+    <div class="message" id="message">Yay!!! I love you so much❤️❤️❤️</div>
   </div>
 
   <!-- Script placed at end to ensure DOM is loaded -->
@@ -164,7 +164,7 @@
     function sayYes() {
       document.getElementById('message').style.display = 'block';
       document.getElementById('bgMusic').play();
-      createHearts();
+      startHearts();
       launchConfetti();
       vibratePhone();
     }
@@ -176,17 +176,23 @@
       btn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    function createHearts() {
-      for (let i = 0; i < 25; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = '❤';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = 3 + Math.random() * 3 + 's';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-      }
-    }
+    let heartInterval;
+
+function startHearts() {
+  if (heartInterval) return; // prevents multiple intervals
+
+  heartInterval = setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 3 + Math.random() * 3 + 's';
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }, 300); // lower = more hearts
+}
+
 
     function launchConfetti() {
       for (let i = 0; i < 80; i++) {
